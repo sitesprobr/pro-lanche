@@ -14,6 +14,7 @@ var data = {
     ["Refrigerante Guaraná Antarctica 200ml", "R$ 2,99"],
     ["Refrigerante Limoneto H2OH! 500ml", "R$ 5,99"],
     ["Refrigerante Original Coca-Cola 220ml", "R$ 4,99"],
+    ["Refrigerante Coca-Cola 600ml", "R$ 8,99"],
     ["Suco Néctar Del Valle Uva 290ml", "R$ 4,99"],
     ["Água Mineral Hidrovita com Gás 510ml", "R$ 3,50"],
     ["Refrigerante Coca-Cola Lata 350ml", "R$ 8,99"],
