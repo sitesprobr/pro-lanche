@@ -7,6 +7,9 @@ var data = {
     ["Combo Turbo com Coca Zero", "Cachorro quente + uma Coca Zero • R$ 29,99"],
     ["Cachorro Quente Triplo", "Pão, molho de carne moída, batata palha, ovo de codorna, milho e ervilha • R$ 34,80"]
   ],
+  adicionais: [
+    ["Maionese tradicional de casa 30g", "R$ 3,00"]
+  ],
   bebidas: [
     ["Isotônico de Limão Gatorade 500ml", "R$ 7,60"],
     ["Isotônico Morango e Maracujá Gatorade 500ml", "R$ 6,99"],
