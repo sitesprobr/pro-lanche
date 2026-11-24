@@ -104,6 +104,11 @@
       <ul id="hotdogs"></ul>
     </section>
 
+    <section>
+      <h2>🥤 Bebidas</h2>
+      <ul id="bebidas"></ul>
+    </section>
+
     <div class="info">
       <p>📲 Monte seu pedido e envie pelo WhatsApp!</p>
     </div>
@@ -167,6 +172,7 @@
       });
     }
     render("hotdogs", data.hotdogs);
+    render("bebidas", data.bebidas);
 
     function totalItens() { var t = 0; for (var k in qty) t += qty[k]; return t; }
 
