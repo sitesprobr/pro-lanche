@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Pró Lanche – Cardápio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Quicksand:wght@500;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #1a1a1a;
+      --card: #242424;
+      --ink: #fff;
+      --muted: #c9c9c9;
+      --accent: #e63329;
+      --accent2: #ffc107;
+      --line: #3a3a3a;
+      color-scheme: dark;
+    }
+
+    * { box-sizing: border-box }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Quicksand', system-ui, sans-serif;
+      font-weight: 500;
+      line-height: 1.5;
+      padding-bottom: 96px;
+    }
+
+    main { max-width: 680px; margin: 0 auto; padding: 0 16px }
+
+    header {
+      text-align: center; padding: 28px 0 18px;
+    }
+    .logo { width: 150px; height: 150px; object-fit: contain; margin: 0 auto 10px; display: block }
+    h1 {
+      font-family: 'Baloo 2', cursive; font-weight: 800; font-size: 40px; margin: 0;
+      color: var(--accent2); letter-spacing: .5px
+    }
+    .tag { color: var(--muted); margin: 4px 0 0; font-weight: 600 }
+
+    .cardapio { display: flex; flex-direction: column; gap: 16px; margin-top: 8px }
+    .cardapio img {
+      width: 100%; border-radius: 16px; display: block; cursor: pointer;
+      border: 1px solid var(--line); box-shadow: 0 4px 14px rgba(0,0,0,.4)
+    }
+    .vazio { color: var(--muted); text-align: center; padding: 40px 10px; border: 2px dashed var(--line); border-radius: 16px }
+
+    .info { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 20px; margin-top: 20px; text-align: center }
+    .info p { margin: 4px 0 }
+    .info a { color: var(--accent2); font-weight: 700 }
+
+    .bar { position: fixed; left: 0; right: 0; bottom: 0; padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px)); background: var(--bg); border-top: 1px solid var(--line); display: flex; justify-content: center; z-index: 10 }
+    .bar a {
+      width: 100%; max-width: 620px; border: 0; border-radius: 999px; background: #25d366; color: #fff;
+      font: 700 17px inherit; padding: 15px; cursor: pointer; text-align: center; text-decoration: none;
+      display: flex; align-items: center; justify-content: center; gap: 8px
+    }
+
+    .lightbox { position: fixed; inset: 0; z-index: 40; background: rgba(0,0,0,.9); display: none; align-items: center; justify-content: center; padding: 16px }
+    .lightbox.aberto { display: flex }
+    .lightbox img { max-width: 98vw; max-height: 92vh; border-radius: 12px }
+    .lightbox .fechar-lb { position: absolute; top: 16px; right: 16px; width: 46px; height: 46px; border: 0; border-radius: 50%; background: rgba(255,255,255,.92); color: #222; font: 700 24px/1 inherit; cursor: pointer }
+  </style>
+</head>
+
+<body>
+  <main>
+    <header>
+      <!-- Se tiver logo, coloque o arquivo e descomente a linha abaixo:
+      <img class="logo" src="imagens/logo.png" alt="Pró Lanche"> -->
+      <h1>🍔 Pró Lanche</h1>
+      <p class="tag">Confira nosso cardápio e faça seu pedido!</p>
+    </header>
+
+    <div class="cardapio" id="cardapio"></div>
+
+    <div class="info">
+      <p>📲 Faça seu pedido pelo WhatsApp!</p>
+      <p>Toque nas imagens para ampliar 🔍</p>
+    </div>
+  </main>
+
+  <div class="bar">
+    <a id="whats" href="#" target="_blank" rel="noopener">💬 Pedir pelo WhatsApp</a>
+  </div>
+
+  <div class="lightbox" id="lightbox">
+    <button class="fechar-lb" id="fechar-lb" aria-label="Fechar imagem">✕</button>
+    <img id="lightbox-img" src="" alt="Cardápio ampliado">
+  </div>
+
+  <script src="menu.js"></script>
+  <script>
+    var WHATS = "0000000000"; // AJUSTAR: numero com DDD, ex 5548999999999
+
+    document.getElementById("whats").href =
+      "https://wa.me/" + WHATS + "?text=" + encodeURIComponent("Olá! Gostaria de fazer um pedido no Pró Lanche 🍔");
+
+    function abrirImagem(src) {
+      document.getElementById("lightbox-img").src = src;
+      document.getElementById("lightbox").classList.add("aberto");
+    }
+
+    var box = document.getElementById("cardapio");
+    if (typeof cardapio !== "undefined" && cardapio.length) {
+      cardapio.forEach(function (src) {
+        var im = document.createElement("img");
+        im.src = src; im.alt = "Cardápio Pró Lanche"; im.loading = "lazy";
+        im.onclick = function () { abrirImagem(src); };
+        box.appendChild(im);
+      });
+    } else {
+      var v = document.createElement("div"); v.className = "vazio";
+      v.textContent = "Cardápio em breve. Em instantes as fotos serão adicionadas.";
+      box.appendChild(v);
+    }
+
+    document.getElementById("fechar-lb").onclick = function () { document.getElementById("lightbox").classList.remove("aberto"); };
+    document.getElementById("lightbox").onclick = function (e) { if (e.target.id === "lightbox") this.classList.remove("aberto"); };
+  </script>
+</body>
+
+</html>
